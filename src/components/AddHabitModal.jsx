@@ -1,31 +1,35 @@
 import { useState } from 'react'
 
 const ICONS = [
-  { emoji: '🏃', label: 'Running' },
-  { emoji: '🧘', label: 'Yoga' },
-  { emoji: '📚', label: 'Reading' },
-  { emoji: '🧘‍♂️', label: 'Meditation' },
-  { emoji: '💧', label: 'Water' },
-  { emoji: '😴', label: 'Sleep' },
-  { emoji: '💪', label: 'Strength' },
-  { emoji: '🚴', label: 'Cycling' },
-  { emoji: '🤸', label: 'Stretching' },
-  { emoji: '🚶', label: 'Walking' },
-  { emoji: '🥗', label: 'Nutrition' },
-  { emoji: '🏠', label: 'Chores' },
-  { emoji: '✍️', label: 'Journaling' },
-  { emoji: '🎵', label: 'Music' },
-  { emoji: '🌿', label: 'Mindfulness' },
-  { emoji: '🎯', label: 'Focus' },
+  { emoji: '🏃', color: '#FF85B3' },
+  { emoji: '⚡', color: '#F5D860' },
+  { emoji: '👤', color: '#72C5FF' },
+  { emoji: '💼', color: '#4e55d0' },
+  { emoji: '🍳', color: '#FFB870' },
+  { emoji: '🌸', color: '#AAEF65' },
+  { emoji: '👟', color: '#72C5FF' },
+  { emoji: '📚', color: '#FF85B3' },
+  { emoji: '🧘', color: '#FFB870' },
+  { emoji: '💧', color: '#72C5FF' },
+  { emoji: '😴', color: '#C9BAFF' },
+  { emoji: '💪', color: '#AAEF65' },
+  { emoji: '🚴', color: '#F5D860' },
+  { emoji: '🎵', color: '#FF85B3' },
+  { emoji: '💡', color: '#F5D860' },
+  { emoji: '🏠', color: '#72C5FF' },
+  { emoji: '✍️', color: '#FFB870' },
+  { emoji: '🎯', color: '#FF85B3' },
+  { emoji: '🥗', color: '#AAEF65' },
+  { emoji: '🌿', color: '#AAEF65' },
 ]
 
-const COLORS = [
-  '#4469ff',
-  '#8fec3c',
-  '#f9d157',
-  '#ff5d88',
-  '#62d4eb',
-  '#ffc06a',
+const CARD_COLORS = [
+  { color: '#F5D860', label: 'Yellow' },
+  { color: '#FF85B3', label: 'Pink' },
+  { color: '#72C5FF', label: 'Blue' },
+  { color: '#AAEF65', label: 'Green' },
+  { color: '#FFB870', label: 'Peach' },
+  { color: '#C9BAFF', label: 'Lavender' },
 ]
 
 const FREQS = ['Daily', '3x / week', '5x / week']
@@ -35,7 +39,7 @@ export default function AddHabitModal({ onAdd, onClose }) {
   const [description, setDescription] = useState('')
   const [frequency, setFrequency] = useState('Daily')
   const [icon, setIcon] = useState(ICONS[0].emoji)
-  const [color, setColor] = useState(COLORS[0])
+  const [color, setColor] = useState(CARD_COLORS[0].color)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -45,98 +49,109 @@ export default function AddHabitModal({ onAdd, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full sm:max-w-md bg-white dark:bg-gray-900 rounded-t-3xl sm:rounded-3xl shadow-2xl p-6 pb-8 sm:pb-6 max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between mb-5">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">New Habit</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-2xl leading-none">×</button>
+    <div className="fixed inset-0 z-50 flex items-end justify-center">
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={onClose} />
+
+      <div className="relative w-full max-w-lg bg-white rounded-t-[2rem] shadow-2xl animate-fade-up max-h-[92vh] overflow-y-auto">
+        {/* Handle bar */}
+        <div className="flex justify-center pt-3 pb-1">
+          <div className="w-10 h-1 rounded-full bg-gray-200" />
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1.5">Habit Name *</label>
-            <input
-              autoFocus
-              value={name}
-              onChange={e => setName(e.target.value)}
-              placeholder="e.g. 30-min run"
-              className="w-full border-2 border-gray-200 dark:border-gray-700 rounded-xl px-4 py-2.5 text-base font-medium outline-none focus:border-[#4469ff] bg-white dark:bg-gray-800 dark:text-white transition-colors"
-            />
+        <div className="px-6 pb-10 pt-3">
+          <div className="flex items-center justify-between mb-6">
+            <button onClick={onClose} className="w-9 h-9 rounded-2xl bg-gray-100 flex items-center justify-center text-gray-500 text-xl font-light">
+              ×
+            </button>
+            <h2 className="text-lg font-bold text-gray-900">Let's start a new habit</h2>
+            <div className="w-9" />
           </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1.5">Description</label>
-            <input
-              value={description}
-              onChange={e => setDescription(e.target.value)}
-              placeholder="optional note"
-              className="w-full border-2 border-gray-200 dark:border-gray-700 rounded-xl px-4 py-2.5 text-base outline-none focus:border-[#4469ff] bg-white dark:bg-gray-800 dark:text-white transition-colors"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">Frequency</label>
-            <div className="flex gap-2">
-              {FREQS.map(f => (
-                <button
-                  key={f}
-                  type="button"
-                  onClick={() => setFrequency(f)}
-                  className={`flex-1 py-2 rounded-xl text-sm font-semibold border-2 transition-all
-                    ${frequency === f
-                      ? 'border-[#4469ff] bg-[#4469ff] text-white'
-                      : 'border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-[#4469ff]'
-                    }`}
-                >
-                  {f}
-                </button>
-              ))}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Name</label>
+              <input
+                autoFocus
+                value={name}
+                onChange={e => setName(e.target.value)}
+                placeholder="Type habit name"
+                className="w-full border-2 border-[#4e55d0] rounded-2xl px-4 py-3 text-base font-semibold outline-none bg-white placeholder:text-gray-300 placeholder:font-normal"
+              />
             </div>
-          </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">Icon</label>
-            <div className="grid grid-cols-8 gap-1.5">
-              {ICONS.map(({ emoji }) => (
-                <button
-                  key={emoji}
-                  type="button"
-                  onClick={() => setIcon(emoji)}
-                  className={`w-full aspect-square rounded-xl text-xl flex items-center justify-center transition-all
-                    ${icon === emoji ? 'bg-[#4469ff] scale-110 shadow-md' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200'}`}
-                >
-                  {emoji}
-                </button>
-              ))}
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Description</label>
+              <input
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+                placeholder="Describe a habit"
+                className="w-full border-2 border-gray-100 rounded-2xl px-4 py-3 text-base outline-none focus:border-[#4e55d0] bg-gray-50 placeholder:text-gray-300 transition-colors"
+              />
             </div>
-          </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">Color</label>
-            <div className="flex gap-3">
-              {COLORS.map(c => (
-                <button
-                  key={c}
-                  type="button"
-                  onClick={() => setColor(c)}
-                  className={`w-9 h-9 rounded-full transition-all ${color === c ? 'scale-125 shadow-lg ring-2 ring-offset-2 ring-gray-400' : ''}`}
-                  style={{ background: c }}
-                  aria-label={c}
-                />
-              ))}
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Intervals</label>
+              <div className="flex gap-2">
+                {FREQS.map(f => (
+                  <button
+                    key={f}
+                    type="button"
+                    onClick={() => setFrequency(f)}
+                    className={`flex-1 py-3 rounded-2xl text-sm font-bold border-2 transition-all
+                      ${frequency === f
+                        ? 'border-[#4e55d0] bg-[#4e55d0] text-white'
+                        : 'border-gray-100 bg-gray-50 text-gray-500 hover:border-gray-300'
+                      }`}
+                  >
+                    {f}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <button
-            type="submit"
-            disabled={!name.trim()}
-            className="w-full py-3.5 rounded-2xl font-bold text-base text-white transition-all active:scale-95 disabled:opacity-40"
-            style={{ background: color }}
-          >
-            Add Habit ✦
-          </button>
-        </form>
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Icon</label>
+              <div className="grid grid-cols-5 gap-2">
+                {ICONS.map(({ emoji, color: iconBg }) => (
+                  <button
+                    key={emoji}
+                    type="button"
+                    onClick={() => setIcon(emoji)}
+                    className={`aspect-square rounded-2xl flex items-center justify-center text-2xl transition-all
+                      ${icon === emoji ? 'scale-110 shadow-lg ring-2 ring-offset-1 ring-gray-400' : 'hover:scale-105'}`}
+                    style={{ background: iconBg }}
+                  >
+                    {emoji}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Card Color</label>
+              <div className="flex gap-3">
+                {CARD_COLORS.map(({ color: c, label }) => (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => setColor(c)}
+                    className={`flex-1 h-10 rounded-2xl transition-all ${color === c ? 'scale-110 shadow-md ring-2 ring-offset-1 ring-gray-400' : 'hover:scale-105'}`}
+                    style={{ background: c }}
+                    aria-label={label}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={!name.trim()}
+              className="w-full py-4 rounded-2xl font-bold text-base text-white bg-gray-900 transition-all active:scale-95 disabled:opacity-30 mt-2"
+            >
+              Add Habit ✦
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   )
